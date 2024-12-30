@@ -16,6 +16,8 @@
                     <td>id</td>
                     <td>name</td>
                     <td>phone</td>
+                    <td>delete</td>
+                    <td>edit</td>
                 </tr>
             </thead>
             <tbody>
@@ -31,8 +33,16 @@
                         <td>
                             <%=val.phone%>
                         </td>
+                        <td>
+                            <a href="/deleteuser?deleteid = <%= val.id %>">delete</a>
+                            
+                            
+                        </td>
+                        <td>
+                            <a href="/edituser?id = <%= val.id %>">edit</a>
+                        </td>
                     </tr>
-
+                    
                     <%}) %>
             </tbody>
         </table>

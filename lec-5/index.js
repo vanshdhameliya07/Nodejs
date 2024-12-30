@@ -10,7 +10,6 @@ app.get(`/`, (req, res) => {
     res.render(`home`)
 })
 
-
 app.listen(port, (err) => {
     if (err) {
         console.log(err);

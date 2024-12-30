@@ -1,28 +1,58 @@
-const express = require(`express`);
+var express = require(`express`);
 
-const port = 9000;
+var port = 9000;
 
-const app = express();
+var app = express();
 
-const record = [];
+var record = [];
 
 app.set(`view engine`, `ejs`)
 app.use(express.urlencoded())
 
+app.get(`/edituser`, (req, res) => {
+    let id = req.query.id;
+    let single = record.find(val => val.id == id);
+    return res.render(`edit`, {
+        single
+    })
+
+})
+app.post(`/updateuser`, (req, res) => {
+    const { editid, username, userphone } = req.body;
+    let up = record.map((val) => {
+        if (val.id == editid) {
+            val.name = username;
+            val.phone = userphone;
+        }
+        return val;
+    })
+    record = up;
+    console.log(`user successfully update`)
+    return res.redirect(`/`);
+})
+
 app.get(`/add`, (req, res) => {
     res.render(`form`);
-})
+});
+
 app.get(`/`, (req, res) => {
-    return res.render(`table`,{
+    return res.render(`table`, {
         record
     })
 })
+app.get(`/deleteuser`, (req, res) => {
+    let id = req.query.deleteid;
+    let deletedata = record.filter(val => val.id != id);
+    record = deletedata;
+    return res.redirect(`/`);
+
+})
 
 app.post(`/adduser`, (req, res) => {
-    const { username, userphone } = req.body;
+    var { username, userphone } = req.body;
     console.log(req.body)
 
-    const obj = {
+    var obj = {
         name: username,
         phone: userphone,
     }
