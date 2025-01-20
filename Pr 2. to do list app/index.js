@@ -7,6 +7,7 @@ var app = express();
 var record = [];
 
 app.set(`view engine`, `ejs`)
+
 app.use(express.urlencoded())
 
 app.get(`/edituser`, (req, res) => {
