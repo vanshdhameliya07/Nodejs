@@ -24,7 +24,12 @@ const userSchema = mongoose.Schema({
     city: {
         type: String,
         required: true,
+    },
+    image:{
+        type: String,
+        required: true,
     }
+   
 })
 const u = mongoose.model("user", userSchema);
 module.exports = u;
