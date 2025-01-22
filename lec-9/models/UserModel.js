@@ -25,11 +25,11 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true,
     },
-    image:{
+    image: {
         type: String,
         required: true,
     }
-   
+
 })
 const u = mongoose.model("user", userSchema);
 module.exports = u;

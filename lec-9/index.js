@@ -8,9 +8,21 @@ const db = require('./config/db');
 
 const UserModel = require('./models/UserModel');
 
-app.use('/uploads', express.static('uploads'));
+const path = require('path');
+
+app.use('/upload', express.static(path.join(__dirname, 'upload')));
 
 const multer = require('multer');
+
+const st = multer.diskStorage({
+    destination: (req, res, cb) => {
+        cb(null, 'upload');
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.fieldname);
+    }
+})
+const imageupload = multer({ storage: st }).single('image');
 
 app.set(`view engine`, `ejs`);
 
@@ -21,19 +33,8 @@ app.get(`/`, (req, res) => {
     return res.render(`form`);
 })
 
-const st = multer.diskStorage({
-    destination: (req, res, cb) => {
-        cb(null, 'upload')
-    },
-    filename: (req, file, cb) => {
-        cb(null, file.originalname);
-    }
-})
-const imageupload = multer({ storage: st }).single('image');
-
-app.post('/adduser', (req, res) => {
-    const { name, email, password, gender, hobby, city, image } = req.body;
-    console.log(req.file);
+app.post('/adduser', imageupload, (req, res) => {
+    const { name, email, password, gender, hobby, city } = req.body;
 
     UserModel.create({
         username: name,
@@ -42,7 +43,8 @@ app.post('/adduser', (req, res) => {
         gender: gender,
         hobby: hobby,
         city: city,
-        image: image
+        image: req.file?.path,
+
     }).then((record) => {
         console.log(record);
         console.log('user create');
