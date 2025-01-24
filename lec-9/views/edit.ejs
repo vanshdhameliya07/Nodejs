@@ -33,8 +33,43 @@
             </tr>
             <tr>
                 <td>gender :</td>
-                <td><input type="radio" name="gender" value="male">male
-                    <input type="radio" name="gender" value="female">female
+                <td><input type="radio" name="gender" <% if(single?.gender=="male" ) {%>checked <%} %> value="male">male
+                        <input type="radio" name="gender" <% if(single?.gender=="female" ) {%>checked <%} %>
+                            value="female">female
+                </td>
+            </tr>
+            <tr>
+                <td>hobby :</td>
+                <td>
+                    <input type="checkbox" <% if(single?.hobby.includes("cricket")) {%> checked <%}%> name="hobby"
+                        value="cricket">cricket
+                        <input type="checkbox" <% if(single?.hobby.includes("music")) {%> checked <%}%> name="hobby"
+                            value="music">music
+                            <input type="checkbox" <% if(single?.hobby.includes("reading")) {%> checked <%}%>
+                                name="hobby"
+                                value="reading">reading
+                </td>
+
+            </tr>
+            <tr>
+                <td>file :</td>
+                <td><input type="file" name="image">
+                    <img src="<%= single.image %>" width="100px">
+                </td>
+            </tr>
+            <tr>
+                <td>City:</td>
+                <td>
+                    <select name="city">
+                        <option value="">-----select city-----</option>
+                        <% const cities=["surat", "ahemdabad" , "vadodara" , "rajkot" ]; cities.forEach(c=> {
+                            %>
+                            <option <% if(single?.city==c) {%>selected<%} %>
+                                    value="<%=c%>">
+                                        <%=c%>
+                            </option>
+                            <% }) %>
+                    </select>
                 </td>
             </tr>
             <tr>

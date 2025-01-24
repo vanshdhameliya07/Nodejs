@@ -149,6 +149,19 @@
                         <input type="text" name="authorname" value="<%= single.authorname %>">
                     </td>
                 </tr>
+                <td>
+                    <label>page :</label>
+                    <select name="page">
+                        <option value="">----select page----</option>
+
+                        <% page=["1", "2" , "3" , "4" ,"5","6","7" ]; page.map((p)=> {
+                            %>
+                            <option value="<%= p %>">
+                                <%= p %>
+                            </option>
+                            <% }); %>
+                    </select>
+                </td>
             </table>
             <input type="submit" value="Submit">
             <a href="/viewuser">View All Users</a>

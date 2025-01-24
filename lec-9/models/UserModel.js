@@ -18,7 +18,7 @@ const userSchema = mongoose.Schema({
         required: true,
     },
     hobby: {
-        type: String,
+        type: [String],
         required: true,
     },
     city: {
