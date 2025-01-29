@@ -15,8 +15,6 @@ const path = require('path');
 app.use('/upload', express.static(path.join(__dirname, 'upload')));
 
 const multer = require('multer');
-const { fstat } = require('fs');
-const { log } = require('console');
 
 const st = multer.diskStorage({
     destination: (req, res, cb) => {
@@ -115,7 +113,7 @@ app.post(`/updateuser`, imageupload, (req, res) => {
                     hobby: hobby,
                     city: city,
                     image: req.file?.path,
-                }).then((user) => {
+                }).then((single) => {
                     console.log('user update');
                     return res.redirect('/viewuser');
                 }).catch((err) => {
@@ -139,7 +137,7 @@ app.post(`/updateuser`, imageupload, (req, res) => {
                     hobby: hobby,
                     city: city,
                     image: singlerow?.image
-                }).then((user) => {
+                }).then((single) => {
                     console.log('user update');
                     return res.redirect('/viewuser')
                 }).catch((err) => {

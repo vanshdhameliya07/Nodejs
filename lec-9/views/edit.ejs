@@ -9,7 +9,7 @@
 
 <body>
 
-    <form action="/updateuser" method="post" align="center">
+    <form action="/updateuser" method="post" align="center" enctype="multipart/form-data">
         <h1>edit user</h1>
 
         <table align="center" border="1">
@@ -52,9 +52,10 @@
 
             </tr>
             <tr>
-                <td>file :</td>
-                <td><input type="file" name="image">
-                    <img src="<%= single.image %>" width="100px">
+                <td>File :- </td>
+                <td>
+                    <input type="file" name="image">
+                    <img src="<%= single?.image %>" width="100" alt="">
                 </td>
             </tr>
             <tr>
